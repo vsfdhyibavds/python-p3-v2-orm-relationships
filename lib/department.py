@@ -16,6 +16,11 @@ class Department:
     def __repr__(self):
         return f"<Department {self.id}: {self.name}, {self.location}>"
 
+    def employees(self):
+        """Return a list of Employee instances that belong to this Department."""
+        from employee import Employee  # avoid circular import
+        return [employee for employee in Employee.all.values() if employee.department_id == self.id]
+
     @classmethod
     def create_table(cls):
         """ Create a new table to persist the attributes of Department instances """
